@@ -138,12 +138,14 @@ The frontend and backend can be deployed as separate Vercel projects:
 
 **Backend** (`backend/`):
 - Uses `@vercel/node` runtime
-- Configure environment variables: `JWT_SECRET`, `GROQ_API_KEY`
+- Configure environment variables in Vercel dashboard:
+  - `JWT_SECRET` - your JWT signing secret
+  - `GROQ_API_KEY` - your Groq API key (from console.groq.com)
 - `vercel.json` routes all requests to `server.js`
 
 **Frontend** (`frontend/`):
 - Static SPA with client-side routing
-- Set `VITE_API_URL` to your backend deployment URL
+- Configure `VITE_API_URL` in Vercel dashboard to point to your backend URL (e.g., `https://tdc-matchmaker-api.vercel.app`)
 - All routes rewrite to `index.html` for React Router
 
 ### Traditional Deployment
