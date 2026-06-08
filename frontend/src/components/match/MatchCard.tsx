@@ -228,44 +228,27 @@ export default function MatchCard({ match, client, matcherName, rank }: Props) {
       {/* Send Match Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black/50 z-[9999] flex items-center justify-center p-4" onClick={() => setShowModal(false)}>
-          <div className="bg-white border border-gold/20 rounded-sm shadow-2xl max-w-lg w-full p-8 animate-fade-up" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-white rounded-3xl shadow-2xl max-w-lg w-full p-8 animate-fade-up" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-8 h-8 bg-burgundy/10 rounded-sm flex items-center justify-center">
-                <Send size={14} className="text-burgundy" />
+              <div className="w-10 h-10 bg-burgundy/10 rounded-2xl flex items-center justify-center">
+                <Send size={16} className="text-burgundy" />
               </div>
               <div>
-                <h2 className="text-display text-charcoal text-xl font-medium">Send Match Introduction</h2>
-                <p className="font-body text-xs text-charcoal-muted">
-                  Introducing {candidate.firstName} to {client.firstName}
-                </p>
+                <h2 className="font-display text-charcoal text-xl font-semibold">Send Introduction</h2>
+                <p className="font-body text-xs text-charcoal-muted">{candidate.firstName} → {client.firstName}</p>
               </div>
             </div>
-
-            <div className="bg-ivory border border-gold/20 rounded-sm p-4 mb-6 max-h-64 overflow-y-auto">
-              {loadingEmail ? (
-                <div className="space-y-2">
-                  {[...Array(5)].map((_, i) => (
-                    <div key={i} className={`h-3 bg-gold/10 rounded animate-pulse`} style={{ width: `${80 - i * 8}%` }} />
-                  ))}
-                </div>
-              ) : (
-                <p className="font-body text-sm text-charcoal leading-relaxed whitespace-pre-wrap">{emailDraft}</p>
-              )}
+            <div className="bg-[#F8F4EE] border border-black/[0.06] rounded-2xl p-5 mb-6 max-h-60 overflow-y-auto">
+              {loadingEmail
+                ? <div className="space-y-2">{[...Array(5)].map((_,i) => <div key={i} className={`h-3 bg-black/5 rounded-full animate-pulse`} style={{width:`${85-i*10}%`}}/>)}</div>
+                : <p className="font-body text-sm text-charcoal leading-relaxed whitespace-pre-wrap">{emailDraft}</p>}
             </div>
-
             <div className="flex gap-3">
-              <button
-                className="flex-1 btn-primary text-sm"
-                onClick={() => {
-                  alert(`Match introduction for ${candidate.firstName} sent to ${client.firstName}! ✓`);
-                  setShowModal(false);
-                }}
-              >
+              <button className="flex-1 btn-primary text-sm"
+                onClick={() => { alert(`Introduction sent to ${client.firstName} ✓`); setShowModal(false); }}>
                 Confirm & Send
               </button>
-              <button className="btn-ghost text-sm" onClick={() => setShowModal(false)}>
-                Cancel
-              </button>
+              <button className="btn-ghost text-sm" onClick={() => setShowModal(false)}>Cancel</button>
             </div>
           </div>
         </div>
