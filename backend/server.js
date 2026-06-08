@@ -10,20 +10,25 @@ const notesRoutes    = require('./routes/notes');
 
 const app = express();
 
-const allowedOrigins = [
-  'http://localhost:5173',
-  'http://localhost:3000',
-  'http://localhost:4173',
-  process.env.FRONTEND_URL,
-].filter(Boolean);
-
+// CORS — allow all origins for Vercel deployment
 app.use(cors({
-  origin: (origin, cb) => {
-    if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
-    cb(new Error('Not allowed by CORS'));
-  },
-  credentials: true,
+  origin: '*',
+  credentials: false,
+  methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
+
+// Handle preflight OPTIONS requests explicitly
+app.options('*', cors());
+
+// Extra CORS headers for safety
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  if (req.method === 'OPTIONS') return res.sendStatus(200);
+  next();
+});
 
 app.use(express.json());
 
