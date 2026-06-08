@@ -1,0 +1,22 @@
+[
+  {
+    "id": "matchmaker1",
+    "name": "Priya Kapoor",
+    "email": "priya@thedatecrew.com",
+    "password": "tdc@1234",
+    "role": "matchmaker",
+    "phone": "9876500001",
+    "joinedDate": "2023-01-15",
+    "profilePhoto": "https://api.dicebear.com/7.x/avataaars/svg?seed=PriyaKapoor"
+  },
+  {
+    "id": "matchmaker2",
+    "name": "Rahul Mehra",
+    "email": "rahul@thedatecrew.com",
+    "password": "tdc@5678",
+    "role": "matchmaker",
+    "phone": "9876500002",
+    "joinedDate": "2023-03-20",
+    "profilePhoto": "https://api.dicebear.com/7.x/avataaars/svg?seed=RahulMehra"
+  }
+]

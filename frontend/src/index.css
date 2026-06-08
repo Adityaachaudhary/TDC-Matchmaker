@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    font-family: 'Inter', sans-serif;
+    background-color: #F0EBE3;
+    color: #1A1A2E;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #C9A84C50; border-radius: 99px; }
+  ::-webkit-scrollbar-thumb:hover { background: #C9A84C; }
+}
+
+@layer components {
+  /* Typography */
+  .font-display { font-family: 'Playfair Display', serif; }
+
+  /* Buttons — fully rounded pill style */
+  .btn-primary {
+    @apply bg-burgundy text-white font-body font-medium tracking-wide
+           px-6 py-2.5 rounded-full transition-all duration-200
+           hover:bg-burgundy-light active:scale-95 shadow-sm
+           focus:outline-none focus:ring-2 focus:ring-burgundy/40 focus:ring-offset-2;
+  }
+  .btn-secondary {
+    @apply border border-gold text-gold font-body font-medium tracking-wide
+           px-6 py-2.5 rounded-full transition-all duration-200 bg-transparent
+           hover:bg-gold hover:text-white active:scale-95
+           focus:outline-none;
+  }
+  .btn-ghost {
+    @apply text-charcoal-muted font-body font-medium
+           px-4 py-2 rounded-full transition-all duration-200
+           hover:text-charcoal hover:bg-gold/10 active:scale-95;
+  }
+
+  /* Cards */
+  .card {
+    @apply bg-white border border-black/[0.06] rounded-2xl shadow-card;
+  }
+  .card-hover {
+    @apply card transition-all duration-300 hover:shadow-card-hover hover:border-gold/30 cursor-pointer;
+  }
+
+  /* Inputs — fully rounded */
+  .input-field {
+    @apply w-full bg-white border border-black/10 rounded-full px-5 py-2.5
+           font-body text-sm text-charcoal placeholder-charcoal-muted/60
+           focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/20
+           transition-all duration-200 shadow-sm;
+  }
+  .select-field {
+    @apply input-field appearance-none pr-10 cursor-pointer;
+  }
+
+  /* Labels */
+  .label {
+    @apply text-[10px] font-body font-semibold tracking-widest uppercase text-charcoal-muted;
+  }
+
+  /* Status badges */
+  .badge { @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium font-body border; }
+  .badge-active    { @apply badge bg-emerald-50 text-emerald-700 border-emerald-200; }
+  .badge-on_hold   { @apply badge bg-amber-50 text-amber-700 border-amber-200; }
+  .badge-matched   { @apply badge bg-violet-50 text-violet-700 border-violet-200; }
+  .badge-paused    { @apply badge bg-slate-50 text-slate-500 border-slate-200; }
+
+  /* Tier pills */
+  .tier-exceptional { @apply bg-amber-50 text-amber-700 border-amber-200; }
+  .tier-high        { @apply bg-emerald-50 text-emerald-700 border-emerald-200; }
+  .tier-good        { @apply bg-blue-50 text-blue-700 border-blue-200; }
+  .tier-possible    { @apply bg-slate-50 text-slate-500 border-slate-200; }
+  .tier-low         { @apply bg-red-50 text-red-500 border-red-200; }
+
+  /* Page entry animation */
+  .page-enter { animation: fadeUp 0.5s ease forwards; }
+  .stagger-1 { animation-delay: 0.05s; }
+  .stagger-2 { animation-delay: 0.10s; }
+  .stagger-3 { animation-delay: 0.15s; }
+  .stagger-4 { animation-delay: 0.20s; }
+}
+
+/* Sidebar */
+.sidebar-bg {
+  background: linear-gradient(180deg, #1A1A2E 0%, #2D1B2E 60%, #3D0F16 100%);
+}
+
+/* Login background */
+.login-bg {
+  background:
+    radial-gradient(ellipse at 15% 85%, rgba(107,31,42,0.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 15%, rgba(201,168,76,0.12) 0%, transparent 55%),
+    linear-gradient(135deg, #F0EBE3 0%, #E8DDD0 100%);
+}
+
+/* Score bar */
+.score-bar-fill { transition: width 1.2s cubic-bezier(0.4,0,0.2,1); }
+
+/* Gradient score bars */
+.score-exceptional { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+.score-high        { background: linear-gradient(90deg, #10b981, #34d399); }
+.score-good        { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+.score-possible    { background: linear-gradient(90deg, #94a3b8, #cbd5e1); }
+.score-low         { background: linear-gradient(90deg, #f87171, #fca5a5); }
