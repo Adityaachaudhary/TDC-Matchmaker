@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { createPortal } from 'react-dom';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import {
   ArrowLeft, Heart, MapPin, GraduationCap, Briefcase, Phone,
@@ -181,10 +182,10 @@ function MatchCard({ match, client, matcherName, rank }: { match: Match; client:
       </div>
 
       {/* Modal */}
-      {showModal && (
+      {showModal && createPortal(
         <div className="fixed inset-0 bg-black/50 z-[9999] flex items-center justify-center p-4" onClick={() => setShowModal(false)}>
-          <div className="bg-white rounded-3xl shadow-2xl max-w-lg w-full p-8 animate-fade-up" onClick={e => e.stopPropagation()}>
-            <div className="flex items-center gap-3 mb-6">
+          <div className="bg-white rounded-3xl shadow-2xl max-w-lg w-full max-h-[90vh] flex flex-col animate-fade-up" onClick={e => e.stopPropagation()}>
+            <div className="flex items-center gap-3 mb-6 p-8 pb-0">
               <div className="w-10 h-10 bg-burgundy/10 rounded-2xl flex items-center justify-center">
                 <Send size={16} className="text-burgundy" />
               </div>
@@ -193,12 +194,12 @@ function MatchCard({ match, client, matcherName, rank }: { match: Match; client:
                 <p className="font-body text-xs text-charcoal-muted">{candidate.firstName} → {client.firstName}</p>
               </div>
             </div>
-            <div className="bg-[#F8F4EE] border border-black/[0.06] rounded-2xl p-5 mb-6 max-h-60 overflow-y-auto">
+            <div className="bg-[#F8F4EE] border border-black/[0.06] rounded-2xl p-5 m-8 mt-0 mb-6 max-h-60 overflow-y-auto">
               {loadingEmail
                 ? <div className="space-y-2">{[...Array(5)].map((_,i) => <div key={i} className={`h-3 bg-black/5 rounded-full animate-pulse`} style={{width:`${85-i*10}%`}}/>)}</div>
                 : <p className="font-body text-sm text-charcoal leading-relaxed whitespace-pre-wrap">{emailDraft}</p>}
             </div>
-            <div className="flex gap-3">
+            <div className="flex gap-3 p-8 pt-0">
               <button className="flex-1 btn-primary text-sm"
                 onClick={() => { alert(`Introduction sent to ${client.firstName} ✓`); setShowModal(false); }}>
                 Confirm & Send
@@ -206,7 +207,8 @@ function MatchCard({ match, client, matcherName, rank }: { match: Match; client:
               <button className="btn-ghost text-sm" onClick={() => setShowModal(false)}>Cancel</button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );
